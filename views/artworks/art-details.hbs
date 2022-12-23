@@ -1,0 +1,104 @@
+<div id="zoom" class="card background-img margin-top mx-2">
+    <img class="card-img" src="https://www.artic.edu/iiif/2/{{artwork.image_id}}/full/843,/0/default.jpg"
+        alt="{{artwork.title}}">
+    <div id="overlay" class="card-img-overlay d-flex flex-column justify-content-end">
+        <a href="#" id="button-zo" class="btn btn-outline-light zoom-button text-center" onclick="zoomOut()">
+            <img class="zoom-images" src="../../images/z-out.png" alt="zoom out">
+        </a>
+        <a href="#" id="button-zi" class="btn btn-outline-light zoom-button text-center display-none"
+            onclick="zoomIn()">
+            <img class="zoom-images" src="../../images/z-in.png" alt="zoom in">
+        </a>
+        <b class="card-title">{{artwork.title}}</b>
+        <p class="card-subtitle mb-2">{{artwork.artist_title}}</p>
+        <form class="form-block favourite-form mt-5" action="/favourites/{{artwork.id}}" method="post">
+            <input type="hidden" value="{{artwork.title}}" name="title">
+            <input type="hidden" value="{{artwork.image_id}}" name="imageUrl">
+            <button class="btn" type="submit"><img src="/images/favourites.png" alt=""></button>
+        </form>
+    </div>
+</div>
+<div class="row my-5 px-5">
+    <div class="col-2 grey">
+        <h5 class="card-title">{{artwork.artist_display}}</h5>
+        <hr>
+        <form action="/artworks/search" method="post">
+            <input type="hidden" value="{{artwork.artist_title}}" name="searchArtwork">
+            <button class="granate author-search" type="submit">SEE AUTHOR'S ARTWORKS</button>
+        </form>
+    </div>
+    <div class="col-6 text-center">
+        <h2 class="granate mb-4">{{artwork.title}}</h2>
+        {{#if artwork.provenance_text}}
+        <p>{{artwork.provenance_text}}</p>
+        {{else}}
+        <p>{{artwork.thumbnail.alt_text}}</p>
+        {{/if}}
+    </div>
+    <div class="col-2">
+        <p>Date display</p>
+        <p class="grey">{{artwork.date_display}}</p>
+        <hr>
+        <p>Technique</p>
+        <p class="grey">{{artwork.medium_display}}</p>
+        <hr>
+        <p>Origin</p>
+        <p class="grey">{{artwork.place_of_origin}}</p>
+        <hr>
+        <p>Dimensions</p>
+        <p class="grey">{{artwork.dimensions}}</p>
+
+    </div>
+    <div class="col-2 grey">
+        <h6>TAGS</h6>
+        {{#each artwork.category_titles}}
+        <form action="/artworks/search" method="post">
+            <input type="hidden" value="{{this}}" name="searchArtwork">
+            <button class="button-tag granatelink" type="submit">{{this}}</button>
+        </form>
+        {{/each}}
+    </div>
+</div>
+
+<div class="be-comment-block mx-5" id="form-comment">
+    {{#if comments}}
+    <h1 class="comments-title">Comments ({{comments.length}})</h1>
+    <div class="be-comment">
+        {{#each comments}}
+        <div class="be-img-comment">
+
+            <img src="{{user.imageUrl}}" alt="" class="be-ava-comment">
+
+        </div>
+        <div class="be-comment-content">
+            <span class="be-comment-name">
+                <a href="/user/profile/{{user._id}}">{{user.username}}</a>
+            </span>
+            <span class="be-comment-time">
+                <i class="fa fa-clock-o"></i>
+                {{dateFormat createdAt "LLL"}}
+
+            </span>
+            <p class="be-comment-text">
+                {{description}}
+            </p>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+    {{#if userNav}}
+    <form class="form-block mt-5" action="/comment/{{artwork.id}}" method="post">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <textarea class="form-input" required="" placeholder="Your text" name="description"></textarea>
+                </div>
+            </div>
+
+        </div>
+        <button class="btn btn-light" type="submit">Submit</button>
+    </form>
+    {{/if}}
+</div>
+
+{{> footer}}

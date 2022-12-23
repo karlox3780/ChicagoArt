@@ -1,0 +1,48 @@
+<div class="white-navbar"></div>
+<section class="vh-100 bg-image padding-top hide" style="background: url('../images/signup-image.jpg') center;">
+  <div class="container h-75 mt-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-9 col-lg-7 col-xl-5">
+        <div class="card card-signup" style="border-radius: 15px;">
+          <div class="card-body card-login p-5">
+            <h4 class="text-uppercase text-center mb-4">Create an account</h4>
+
+            <form class="signup-form" action="/auth/signup" method="POST" enctype="multipart/form-data">
+
+              <div class="form-outline mb-1">
+                <input type="text" class="form-control form-control-md" name="username" required />
+                <label class="form-label">Username</label>
+              </div>
+
+              <div class="form-outline mb-1">
+                <input type="email" class="form-control form-control-md" name="email" required />
+                <label class="form-label">Email</label>
+              </div>
+
+              <div class="form-outline mb-1">
+                <input type="file" class="form-control form-control-md" name="image" required />
+                <label class="form-label">Image</label>
+              </div>
+
+              <div class="form-outline mb-1">
+                <input type="password" class="form-control form-control-md" name="password" required />
+                <label class="form-label">Password</label>
+              </div>
+
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-info btn-block btn-md text-body">Register</button>
+              </div>
+              {{#if errorMessage}}
+              <p class="error">{{errorMessage}}</p>
+              {{/if}}
+              <p class="text-center mt-3 mb-0">Have already an account? <a href="/auth/login"
+                  class=" fw-bold text-body"><u>Login here</u></a></p>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

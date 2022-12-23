@@ -1,0 +1,41 @@
+<div class="padding-top px-5">
+    <div class="row my-5 px-5">
+        <div class="col-6">
+            <div class="card background-img mx-2">
+                <img class="card-img" src="https://www.artic.edu/iiif/2/{{artwork.image_id}}/full/843,/0/default.jpg"
+                    alt="{{artwork.title}}">
+            </div>
+        </div>
+
+        <div class="col-6 text-center">
+            <h3 class="pt-5">{{artwork.title}}</h3>
+            <h6 class="card-title grey">{{artwork.artist_display}}</h6>
+            <hr><br>
+            {{#if artwork.provenance_text}}
+            <h5>{{artwork.provenance_text}}</h5>
+            {{else}}
+            <h5>{{artwork.thumbnail.alt_text}}</h5>
+            {{/if}}
+
+            <hr><br>
+
+            <p>Date display</p>
+            <p class="grey">{{artwork.date_display}}</p>
+
+            <p>Technique</p>
+            <p class="grey">{{artwork.medium_display}}</p>
+
+            <p>Origin</p>
+            <p class="grey">{{artwork.place_of_origin}}</p>
+
+            <p>Dimensions</p>
+            <p class="grey">{{artwork.dimensions}}</p>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+{{> footer}}
